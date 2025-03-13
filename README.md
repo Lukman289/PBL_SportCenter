@@ -1,40 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Sport Center
 
-## Getting Started
+## Project Description
+Sport Center is a web-based platform developed using Next.js. This application aims to facilitate users in making reservations and managing sports facilities such as futsal courts, basketball courts, gyms, and more.
 
-First, run the development server:
+## Key Features
+- **Online Reservation**: Users can book sports facilities online.
+- **Schedule Management**: Displays court availability schedules.
+- **Digital Payment**: Supports various payment methods.
+- **User Authentication**: Login and registration for users and admins.
 
-```bash
+## Technologies Used
+- **Frontend**: Next.js, React, Tailwind CSS
+- **Backend**: Node.js Express
+- **Database**: MySQL
+
+## Installation & Running the Project
+
+### Prerequisites
+Make sure you have installed:
+- **Node.js** (Latest version recommended)
+- **npm** or **yarn**
+
+### Installation Steps
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/username/sport-center.git
+   ```
+2. Navigate to the project folder:
+   ```sh
+   cd sport-center
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+   or if using yarn:
+   ```sh
+   yarn install
+   ```
+
+### Running the Project
+To run the project in development mode:
+```sh
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+or
+```sh
+yarn dev
+```
+The application will run at `http://localhost:3000/`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+## Project Structure
+```
+/sport-center
+│   ├── /components # Reusable components
+│   ├── /pages      # Application pages (Next.js routing)
+|   │── /public        # Static files (images, icons, etc.)
+│   ├── /styles     # Styling files (CSS/Tailwind)
+│── .gitignore     # Files ignored by Git
+│── package.json   # Dependencies and npm configurations
+│── README.md      # Project documentation
+```
