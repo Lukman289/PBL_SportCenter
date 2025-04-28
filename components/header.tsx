@@ -1,7 +1,7 @@
 export default function Header() {
   return (
     <header>
-      <h1>My Site</h1>
+      <h1>Sport Center</h1>
     </header>
   );
 }
