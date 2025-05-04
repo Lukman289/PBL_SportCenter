@@ -2,19 +2,18 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import "@/styles/globals.css";
-import Navbar from "@/components/navbar";
+import Navbar from "@/shared/components/navbar";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const isLoginPage = router.pathname.startsWith("/login");
-  const isRegisterPage = router.pathname.startsWith("/register");
+  const isAuthPage = router.pathname.startsWith("/auth");
 
   return (
     <>
-      {!(isLoginPage || isRegisterPage) && <Navbar />}
+      {!(isAuthPage) && <Navbar />}
       <div
         className={
-          isLoginPage || isRegisterPage
+          isAuthPage
             ? "bg-skye min-h-screen"
             : "bg-background min-h-screen"
         }

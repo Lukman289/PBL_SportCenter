@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { login } from "../api/post/auth";
+import { login } from "../../api/auth.api";
 
 export default function Login() {
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {

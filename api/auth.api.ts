@@ -1,4 +1,4 @@
-import AxiosInstance from "../../../utils/axiosInstance";
+import AxiosInstance from "../lib/axiosInstance";
 
 interface LoginPayload {
   email: string;

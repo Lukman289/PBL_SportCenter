@@ -8,7 +8,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-skye shadow-md sticky top-0 z-50">
+    <nav className="bg-skye shadow-md fixed top-0 z-50 w-full">
       <div className="mx-auto max-full px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
@@ -41,7 +41,7 @@ export default function Navbar() {
                 Reservasi
               </a>
               <a
-                href="#"
+                href="/auth/login"
                 className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-skye-hover hover:text-white"
               >
                 Login
@@ -116,7 +116,7 @@ export default function Navbar() {
               Reservasi
             </a>
             <a
-              href="#"
+              href="/auth/login"
               className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-skye-hover hover:text-white"
             >
               Login

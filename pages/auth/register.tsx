@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
-import { register } from "../api/post/auth";
+import { register } from "../../api/auth.api";
 
 export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState(true);
