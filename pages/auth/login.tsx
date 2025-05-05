@@ -67,7 +67,7 @@ export default function Login() {
           </button>
           <p className="text-center text-sm">
             Belum punya akun?{" "}
-            <Link href="/register" className="text-blue-500 hover:underline">
+            <Link href="/auth/register" className="text-blue-500 hover:underline">
               Register
             </Link>{" "}
           </p>
