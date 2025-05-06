@@ -1,9 +1,8 @@
 import "@/styles/globals.css";
-import type { AppProps } from "next/app";
+import { AppProps } from 'next/app';
 import { useRouter } from "next/router";
-import "@/styles/globals.css";
-import Navbar from "@/shared/components/navbar";
-import { AuthProvider } from "@/context/auth.context";
+import { AuthProvider } from '../context/auth.context';
+import Navbar from "../shared/components/navbar";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -11,7 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <AuthProvider>
-      {!(isAuthPage) && <Navbar />}
+      {!isAuthPage && <Navbar />}
       <div
         className={
           isAuthPage
