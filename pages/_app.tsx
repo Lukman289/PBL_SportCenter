@@ -1,16 +1,16 @@
 import "@/styles/globals.css";
-import type { AppProps } from "next/app";
+import { AppProps } from 'next/app';
 import { useRouter } from "next/router";
-import "@/styles/globals.css";
-import Navbar from "@/shared/components/navbar";
+import { AuthProvider } from '../context/auth.context';
+import Navbar from "../shared/components/navbar";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const isAuthPage = router.pathname.startsWith("/auth");
 
   return (
-    <>
-      {!(isAuthPage) && <Navbar />}
+    <AuthProvider>
+      {!isAuthPage && <Navbar />}
       <div
         className={
           isAuthPage
@@ -20,6 +20,6 @@ export default function App({ Component, pageProps }: AppProps) {
       >
         <Component {...pageProps} />
       </div>
-    </>
+    </AuthProvider>
   );
 }
