@@ -5,20 +5,20 @@ import { useAuth } from "../../context/auth.context";
 import { Role } from "../../types/auth.type";
 
 export default function Login() {
-  const { authState, login, clearError } = useAuth();
+  const { isAuthenticated, user, loading, error, login, clearError } = useAuth();
   const router = useRouter();
 
   // Redirect jika sudah login
   useEffect(() => {
-    if (authState.isAuthenticated && authState.user) {
-      redirectBasedOnRole(authState.user.role);
+    if (isAuthenticated && user) {
+      redirectBasedOnRole(user.role);
     }
     
     // Clear error saat komponen dimount
     return () => {
       clearError();
     };
-  }, [authState.isAuthenticated, authState.user]);
+  }, [isAuthenticated, user]);
 
   const redirectBasedOnRole = (role: Role) => {
     switch (role) {
@@ -59,9 +59,9 @@ export default function Login() {
           <span className="text-black">Sport</span>{" "}
           <span className="text-blue-300">Center</span>
         </h1>
-        {authState.error && (
+        {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-            {authState.error}
+            {error}
           </div>
         )}
         <form
@@ -97,9 +97,9 @@ export default function Login() {
           <button
             className="w-full py-2 rounded-md bg-blue-300 hover:bg-blue-400 text-black font-semibold transition-colors mt-2"
             type="submit"
-            disabled={authState.loading}
+            disabled={loading}
           >
-            {authState.loading ? "Memproses..." : "Login"}
+            {loading ? "Memproses..." : "Login"}
           </button>
           <p className="text-center text-sm">
             Belum punya akun?{" "}
