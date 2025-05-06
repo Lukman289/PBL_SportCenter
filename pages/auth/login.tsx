@@ -1,7 +1,44 @@
 import Link from "next/link";
-import { login } from "../../api/auth.api";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useAuth } from "../../context/auth.context";
+import { Role } from "../../types/auth.type";
 
 export default function Login() {
+  const { isAuthenticated, user, loading, error, login, clearError } = useAuth();
+  const router = useRouter();
+
+  // Redirect jika sudah login
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      redirectBasedOnRole(user.role);
+    }
+    
+    // Clear error saat komponen dimount
+    return () => {
+      clearError();
+    };
+  }, [isAuthenticated, user]);
+
+  const redirectBasedOnRole = (role: Role) => {
+    switch (role) {
+      case Role.SUPER_ADMIN:
+        router.replace("/admin/dashboard");
+        break;
+      case Role.ADMIN_CABANG:
+        router.replace("/admin/cabang/dashboard");
+        break;
+      case Role.OWNER_CABANG:
+        router.replace("/owner/dashboard");
+        break;
+      case Role.USER:
+        router.replace("/");
+        break;
+      default:
+        router.replace("/");
+    }
+  };
+
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -9,16 +46,9 @@ export default function Login() {
     const password = formData.get("password") as string;
 
     try {
-      const data = await login({ email, password });
-      console.log("Login successful!!!", data);
-    } catch (error: any) {
-      if (error.response) {
-        console.error("Error response:", error.response.data);
-      } else if (error.request) {
-        console.error("No response received:", error.request);
-      } else {
-        console.error("Error setting up request:", error.message);
-      }
+      await login(email, password);
+    } catch (error) {
+      console.error("Login error:", error);
     }
   };
 
@@ -29,6 +59,11 @@ export default function Login() {
           <span className="text-black">Sport</span>{" "}
           <span className="text-blue-300">Center</span>
         </h1>
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            {error}
+          </div>
+        )}
         <form
           className="flex flex-col space-y-4 justify-around"
           onSubmit={handleLogin}
@@ -62,8 +97,9 @@ export default function Login() {
           <button
             className="w-full py-2 rounded-md bg-blue-300 hover:bg-blue-400 text-black font-semibold transition-colors mt-2"
             type="submit"
+            disabled={loading}
           >
-            Login
+            {loading ? "Memproses..." : "Login"}
           </button>
           <p className="text-center text-sm">
             Belum punya akun?{" "}
