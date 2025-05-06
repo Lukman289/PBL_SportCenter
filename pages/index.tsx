@@ -1,11 +1,41 @@
 import CarouselBranch from "@/shared/components/carouselBranch";
+import { useAuth } from "../context/auth.context"; // Path disesuaikan
+import { Role } from "../types/auth.type"; // Path disesuaikan
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function Home() {
+  const { user, isAuthenticated, loading } = useAuth();
+  const router = useRouter();
+
+  // Untuk USER, kita hanya ingin memastikan mereka tidak diarahkan
+  // jika mereka secara spesifik adalah SUPER_ADMIN, ADMIN_CABANG, atau OWNER_CABANG
+  // yang seharusnya memiliki dashboard sendiri.
+  // Jika pengguna adalah USER atau belum login, mereka bisa melihat halaman ini.
+  useEffect(() => {
+    if (!loading && isAuthenticated && user) {
+      if (user.role === Role.SUPER_ADMIN) {
+        router.replace('/admin/dashboard');
+      } else if (user.role === Role.ADMIN_CABANG) {
+        router.replace('/admin/cabang/dashboard');
+      } else if (user.role === Role.OWNER_CABANG) {
+        router.replace('/owner/dashboard');
+      }
+    }
+  }, [user, isAuthenticated, loading, router]);
+
+  // Jika masih loading, tampilkan sesuatu ... placeholder
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <main className="flex flex-col justify-center items-center">
         <div className="flex flex-col bg-[url(../public/images/image.png)] gap-[50px] bg-cover items-center w-full justify-center min-h-screen bg-fixed text-center">
-          <h1 className="text-[64px] text-white font-bold">Selamat Datang!</h1>
+          <h1 className="text-[64px] text-white font-bold">
+            Selamat Datang{isAuthenticated && user && user.role === Role.USER ? `, ${user.name}` : ''}!
+          </h1>
           <p className="text-[24px] text-white">
             Siap untuk aktivitas olahraga hari ini? Mari tetap bugar dan
             berprestasi!
