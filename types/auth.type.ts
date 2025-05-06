@@ -13,6 +13,7 @@ export interface User {
   phone?: string;
   createdAt?: Date;
   updatedAt?: Date;
+  branchId?: number;
 }
 
 export interface LoginPayload {
